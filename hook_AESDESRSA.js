@@ -1,3 +1,7 @@
+// Original script: https://www.codenong.com/jsecbee028022b/
+//
+// frida -U -f com.fun.app -l .\hook_AESDESRSA.js
+
 var N_ENCRYPT_MODE = 1
 var N_DECRYPT_MODE = 2
 
