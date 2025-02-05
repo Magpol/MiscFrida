@@ -1,0 +1,40 @@
+Java.perform(function () {
+    var random_name = function (length) {
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
+    Java.choose("net.zetetic.database.sqlcipher.SQLiteDatabase", {
+        onMatch: function (instance) {
+            var String = Java.use('java.lang.String');
+            var testArray = Java.use("java.util.HashMap");
+
+            let Obj = [];
+
+            console.log(instance.getPath());
+            console.log(instance.isOpen());
+            let test = instance.getSyncedTables();
+            console.log(Java.cast(test,testArray));
+            console.log(instance.isReadOnly());
+            var dbName = random_name(5);
+            var sql1 = String.$new("ATTACH DATABASE '/data/user/0/com.random/databases/" + dbName + ".sql.plaintext' as " + dbName + " KEY '';");
+            var sql2 = String.$new("SELECT sqlcipher_export('" + dbName + "');");
+            var sql3 = String.$new("DETACH DATABASE " + dbName);
+ 
+            instance.rawExecSQL(sql1,Obj);
+            console.log(Obj.Value);
+            instance.rawExecSQL(sql2,Obj);
+            console.log(Obj.Value);            
+            instance.rawExecSQL(sql3,Obj);
+            console.log(Obj.Value);
+            console.log("Found SqlCipherDatabaseProvider instance");
+        },
+        onComplete: function (ins) { }
+    });
+})
+
+
