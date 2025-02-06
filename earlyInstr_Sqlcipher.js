@@ -1,4 +1,4 @@
-// frida -U -f com.wire -l earlyInstr.js
+// frida -U -f com.myapp -l earlyInstr_Sqlcipher.js
 // Hook library on launch and get values from function...
 function tryHookTestlib() {
     var baseAddr = Module.findBaseAddress("libsqlcipher.so");
