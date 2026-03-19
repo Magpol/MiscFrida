@@ -44,3 +44,10 @@ Java layer
 ## Usage:
 frida -U -f <package> --no-pause -l frida_crypto_hooks.js
 frida -U -p <pid>                -l frida_crypto_hooks.js
+
+## Output format
+Every hit prints one line:
+- [KEY]  SecretKeySpec.<init>  (AES)  str="password123"  hex=70 61 73 73 77 6f 72 64 31 32 33  len=11
+- [NONCE]  GCMParameterSpec.<init>  hex=a3 f1 9c 2b 00 11 22 33 44 55 66 77  tagBits=128  len=12
+- [PASSPHRASE]  sqlite3_key  str=x'3e4a...  hex=78 27 33 65 ...  len=64  lib=libsqlcipher.so
+- [DERIVED]  PKCS5_PBKDF2_HMAC [derived]  hex=8f 2a ...  lib=libcrypto.so
